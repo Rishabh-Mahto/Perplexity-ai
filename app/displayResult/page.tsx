@@ -1,27 +1,26 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-
+import { Suspense } from "react";
+import { DisplayResultContent } from "./_components/DisplayResultContent";
 import { Header } from "./_components/Header";
-import { Results } from "./_components/Results";
-import SearchBox from "@/components/SearchBox";
 
-export default function DisplayResult() {
-  const searchParams = useSearchParams();
-  const answer = searchParams.get("answer") || "";
-  const query = searchParams.get("query") || "";
-
+// Loading component
+function DisplayResultLoading() {
   return (
-    <div className="w-full h-full bg-white p-3">
-      {/* top part */}
+    <div className="w-full h-full bg-white p-1 sm:p-2 md:p-3">
       <Header />
-
-      {/* Content for the searched result */}
-      <div className="flex flex-col justify-between h-[95%] w-full items-center">
-        <Results query={query} />
-        <SearchBox isFollowUpSearch={true} />
+      <div className="flex flex-col justify-between h-[95%] w-full items-center px-2 sm:px-4">
+        <div className="flex items-center justify-center h-full">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2a7480]"></div>
+        </div>
       </div>
     </div>
+  );
+}
+
+// Main page component (Server Component)
+export default function DisplayResult() {
+  return (
+    <Suspense fallback={<DisplayResultLoading />}>
+      <DisplayResultContent />
+    </Suspense>
   );
 }
