@@ -89,7 +89,7 @@ export default function AnswerDisplay({ query }: { query: string }) {
         (!loadingSearch &&
           searchResults.length === 0 &&
           !refs.dataFetchedRef.current[query]) ? (
-          <div className="grid grid-cols-4 gap-x-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
@@ -98,7 +98,7 @@ export default function AnswerDisplay({ query }: { query: string }) {
             ))}
           </div>
         ) : searchResults.length > 0 ? (
-          <div className="grid grid-cols-4 gap-x-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {searchResults.map((result, index) => (
               <SearchResultCard key={result.link || index} result={result} />
             ))}

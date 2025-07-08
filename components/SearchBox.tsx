@@ -11,6 +11,7 @@ import { GoPaperclip } from "react-icons/go";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export default function SearchBox({
   isFollowUpSearch = false,
@@ -25,6 +26,8 @@ export default function SearchBox({
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   const router = useRouter();
+
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     if (isFollowUpSearch || !query.trim()) {
@@ -92,10 +95,14 @@ export default function SearchBox({
     ${
       isFollowUpSearch
         ? "mt-0 w-full max-w-[700px]"
-        : "mt-10 w-full max-w-[650px]"
+        : "mt-0 md:mt-10 w-full max-w-[650px]"
     }
-    ${showSuggestions ? "rounded-b-none pb-[4px]" : "rounded-b-lg"}
-    ${loading ? "border-slate-300/50 opacity-60" : "border-slate-300"}
+    ${
+      showSuggestions
+        ? "rounded-b-lg rounded-t-none md:rounded-t-lg md:rounded-b-none pb-[4px]"
+        : "rounded-b-lg"
+    }
+    ${loading ? "border-slate-300/50 opacity-60" : "border-gray-400"}
   `}
       >
         <textarea
@@ -196,15 +203,15 @@ export default function SearchBox({
         </div>
       </div>
       {/* Dropdown */}
-      {/* Dropdown */}
       {!isFollowUpSearch && showSuggestions && suggestions.length > 0 && (
         <ul
           className={`
-      absolute top-full left-0 right-0 
-      w-full 
+      absolute left-0 right-0 
+      w-full
+      ${isMobile ? "bottom-full" : "top-full"} 
       ${isFollowUpSearch ? "max-w-[700px]" : "max-w-[650px]"}
-      bg-white border-2 border-slate-300 shadow-md rounded-b-lg 
-      translate-y-[-5px] max-h-60 z-10
+      bg-white border-2 border-gray-400 shadow-top md:shadow-md rounded-t-lg md:rounded-t-none md:rounded-b-lg translate-y-[5px]
+      md:translate-y-[-5px] max-h-60 z-10
       mx-auto
     `}
           style={{ minWidth: 0 }}

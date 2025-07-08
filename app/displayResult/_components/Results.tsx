@@ -31,8 +31,7 @@ export const Results = ({ query }: ResultsProps) => {
   );
 
   return (
-    <div className="w-[700px] bg-white flex flex-col h-[70vh]">
-      {/* Fixed height header section */}
+    <div className="w-full md:w-[700px] bg-white flex flex-col h-[70vh]">
       <div className="flex-none">
         <h2 className="text-2xl font-semibold text-[#0c1a19] mb-4">{query}</h2>
         <nav className="flex space-x-4 border-b-2 border-gray-200">

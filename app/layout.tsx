@@ -29,8 +29,8 @@ export default function RootLayout({
       <body className="antialiased">
         <div className="flex min-h-screen">
           <Sidebar />
-          <main className="flex items-center justify-center w-full py-3 pr-3 bg-[#f0f0e9]">
-            <div className="flex  h-full w-full  rounded-lg">{children}</div>
+          <main className="flex items-center justify-center w-full p-3 md:py-3 md:pr-3 bg-[#f0f0e9]">
+            <div className="flex  h-full w-full rounded-lg">{children}</div>
           </main>
         </div>
       </body>

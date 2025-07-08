@@ -1,3 +1,5 @@
+"use client";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
   Home,
   Globe,
@@ -9,8 +11,9 @@ import {
 } from "lucide-react";
 
 export default function Sidebar() {
-  return (
-    <div className="w-[70px] bg-[#f0f0e9] h-screen flex flex-col items-center justify-between py-3">
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  return !isMobile ? (
+    <div className="w-[70px] bg-[#f0f0e9] h-screen flex flex-col items-center justify-between py-3 ">
       <div className="flex flex-col items-center gap-4 w-full">
         <div className="mt-1 mb-1">
           <Sparkles size={25} color="#0c1a19" />
@@ -49,5 +52,5 @@ export default function Sidebar() {
         <span className="text-[#444] text-[11px]">Account</span>
       </div>
     </div>
-  );
+  ) : null;
 }
